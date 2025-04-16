@@ -1,12 +1,14 @@
 import Input from "./UI/Input";
-import './NewBets.module.css';
-import { useActionState } from "react";
+import classes from './NewBets.module.css';
+import { useActionState, useRef } from "react";
 import { Form, Link } from "react-router-dom";
 
 export default function NewBet({ bet, players }) {
 
+    const winner = useRef(bet?.winner);
+
     function onChangeSelectHandler(id, event) {
-        console.log(id);
+        //console.log(id);
     }
 
     function formSubmit(prevState, formData) {
@@ -16,8 +18,8 @@ export default function NewBet({ bet, players }) {
         const teamA = formData.getAll('teamA');
         const teamB = formData.getAll('teamB');
         const text = formData.get('text');
-console.log(teamA);
-console.log(teamB);
+        // console.log(teamA);
+        // console.log(teamB);
         let errors = [];
 
         if (title.trim().length < 10) {
@@ -85,7 +87,7 @@ console.log(teamB);
 
     return (
         <>
-            <Form action={formAction} method="post">
+            <Form method="post" className={classes.form}>
                 <div>
                     <Input label="Title of Bet" id="title" name="title" defaultValue={formState.enteredValues?.title} />
                     {formState.enteredValues?.status ??
@@ -101,14 +103,20 @@ console.log(teamB);
                             </select>
                         </div>)
                     }
-                    <div>
-                        <p>
-                            <span>Participants A</span>
+                    {bet.winner ?? (
+                        <div>
+                            <label name="winner">Winner : {bet.winner}</label>
+                            <input type="hidden" id="winner" name="winner">{bet.winner}</input>
+                        </div>)
+                    }
+                    <div className={classes.participants}>
+                    <p className={classes["participants-container"]}>
+                    <span className={classes.teamName}>Participants A</span>
                             <select
                                 name="teamA"
                                 id="teamA"
                                 multiple={true}
-                                className='multi-select'
+                                className={classes["teams-list"]}
                                 defaultValue={formState.enteredValues?.players.teamA}
                                 onChange={() => onChangeSelectHandler("teamA")}>
                                 {players.map(player => (
@@ -120,11 +128,11 @@ console.log(teamB);
                                 ))}
                             </select>
                         </p>
-                        <p>
-                            <span>Participants B</span>
+                        <p className={classes["participants-container"]}>
+                        <span className={classes.teamName}>Participants B</span>
                             <select name="teamB" id="teamB"
                                 multiple={true}
-                                className='multi-select'
+                                className={classes["teams-list"]}
                                 defaultValue={formState.enteredValues?.players.teamA}
                                 onChange={() => onChangeSelectHandler("teamA")}>
                                 {players.map(player => (
@@ -147,12 +155,12 @@ console.log(teamB);
                         ))}
                     </ul>
                 )}
-                <p className="form-actions">
+                <p className={classes.actions}>
                     {/* <button type="reset" className="button button-flat">
                         Reset
                     </button> */}
-                    <button className="button">Save Bet</button>
-                    <Link to=".." relative="path">Back</Link>
+                    <button className={classes.actions}>Save Bet</button>
+                    <Link className={classes.actions} type="button"  to=".." relative="path">Back</Link>
                 </p>
             </Form>
         </>

@@ -43,7 +43,7 @@ const router = createBrowserRouter([
                 index: true,
                 element: <BetsDetailPage />
               },
-              { path: 'edit', element: <EditBetsPage /> },
+              { path: 'edit', element: <EditBetsPage />, action: createNewBetAction  },
             ],
           },
           { path: 'new', element: <NewBetPage />, loader: getAllPlayersLoader, action: createNewBetAction }

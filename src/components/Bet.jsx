@@ -2,14 +2,17 @@ import classes from './Bet.module.css';
 export default function Bet({ bet, players }) {
     return (
         <>
-            <h2>{bet.betId}</h2>
             <div className={classes.betTitle}>
-                <p className={classes.title}>
-                    <span>{bet.players.teamA.length > 0
-                        ?? bet.players.teamA.map((player) => { return player.name })}</span>
+                <p className={classes["team-versus"]}>
+                    <span>{
+                    players
+                    .filter((p) => bet.players.teamA.includes(p.id))
+                    .map((player) => { return player.name })}</span>
                     <span>&nbsp;VS&nbsp;</span>
-                    <span>{bet.players.teamB.length > 0
-                        ?? bet.players.teamB.map((player) => { return player.name })}</span>
+                    <span>{
+                    players
+                    .filter((p) => bet.players.teamB.includes(p.id))
+                    .map((player) => { return player.name })}</span>
                 </p>
             </div>
             <div className='status'>
@@ -38,7 +41,7 @@ export default function Bet({ bet, players }) {
                     </ul>
                 </div>
             </div>
-            <div className="bet-content">
+            <div className={classes.content}>
                 {bet.text}
             </div>
             <div>

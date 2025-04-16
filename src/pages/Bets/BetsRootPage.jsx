@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
+import BetsNavigation from "../../components/BetsNavigation";
 
 export default function BetsRootPage() {
     return (
         <>
-            <h2>BETS BETS BETS</h2>
+            <BetsNavigation/>
             <Outlet/>
         </>
     );

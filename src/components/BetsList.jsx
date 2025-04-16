@@ -4,33 +4,54 @@ import classes from './BetsList.module.css';
 export default function BetsList() {
     const { bets } = useLoaderData();
     const data = useRouteLoaderData("bets-root");
-
+ 
     return (
         <>
-            <h2>List of current bets</h2>
-            <div className='bets'>
+            <div className={classes.bets}>
+                <h1>List of all current bets</h1>
                 <ul className={classes.list}>
-                    {bets.map((bet) => (<li key={bet.betId}>
-                        <p>
-                            <Link to={`/bets/${bet.betId}`} >
-                                <span>{bet.title}</span>
-                                <br />
-                                {bet.players.teamA.map((player) => {
-                                    const aPlayer = data.find((p) => p.id === player);
-                                    return aPlayer.name
-                                })}
-                                &nbsp;VS&nbsp;
-                                {bet.players.teamB.map((player) => {
-                                    const aPlayer = data.find((p) => p.id === player);
-                                    return aPlayer.name
-                                })}
-                                <br />
-                                Status:
-                                <span className={classes.status}> {bet.status.trim().length === 0 ? 'On going' : ''}</span>
-                                {bet.status.trim().length > 1 ? (<span className={classes.winner}>Winner: {bet.winner}</span>) : ''}
+                    {bets.map((bet) => (
+                        <li key={bet.betId} className={classes.item}>
+                            <Link to={`/bets/${bet.betId}`} className={`${bet.status === 'complete' ? classes.complete : ''}`}>
+                                <img src={bet.image} alt={event.title} />
+                                <div className={classes.content}>
+                                    <span>{bet.title}</span>
+                                    <br />
+                                    {bet.players.teamA.map((player) => {
+                                        const aPlayer = data.find((p) => p.id === player);
+                                        return aPlayer.name
+                                    })}
+                                    &nbsp;VS&nbsp;
+                                    {bet.players.teamB.map((player) => {
+                                        const aPlayer = data.find((p) => p.id === player);
+                                        return aPlayer.name
+                                    })}
+                                </div>
+                                <div>
+                                    <p>
+                                        Status: <span className={classes.status}>{bet.status}</span>
+                                    </p>
+                                    {
+                                        bet.winner.trim().length > 0 ? (
+                                            <p>
+                                                Winner Team: {
+                                                    bet.winner === "teamA" ? 
+                                                    bet.players.teamA.map((player) => {
+                                                        const aPlayer = data.find((p) => p.id === player);
+                                                        return aPlayer.name
+                                                    })
+                                                    : 
+                                                    bet.players.teamB.map((player) => {
+                                                        const aPlayer = data.find((p) => p.id === player);
+                                                        return aPlayer.name
+                                                    })
+                                                }
+                                            </p>
+                                        ) : ''
+                                    }
+                                </div>
                             </Link>
-                        </p>
-                    </li>))}
+                        </li>))}
                 </ul>
             </div>
         </>

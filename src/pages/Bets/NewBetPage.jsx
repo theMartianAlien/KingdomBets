@@ -24,15 +24,17 @@ export default function NewBetPage() {
 
 export async function action({ request, params }) {
 
+    const betId = params.betId;
     const data = await request.formData();
     const title = data.get('title');
     const teamA = data.getAll('teamA');
     const teamB = data.getAll('teamB');
     const status = data.get('bet-status') ?? 'ongoing';
-    const winner = data.get('title');
+    const winner = data.get('winner');
     const link = data.get('link');
     const text = data.get('text');
     const betData = {
+        betId,
         title,
         players: {
             teamA,
