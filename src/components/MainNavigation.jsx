@@ -3,7 +3,7 @@ import classes from './MainNavigation.module.css';
 
 export default function MainNavigation() {
     return (
-        <header classes={classes.header}>
+        <header className={classes.header}>
             <nav>
                 <ul className={classes.list}>
                     <li>

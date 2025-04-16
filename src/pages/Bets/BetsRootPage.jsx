@@ -4,8 +4,10 @@ import BetsNavigation from "../../components/BetsNavigation";
 export default function BetsRootPage() {
     return (
         <>
-            <BetsNavigation/>
-            <Outlet/>
+            <BetsNavigation />
+            <main>
+                <Outlet />
+            </main>
         </>
     );
 }

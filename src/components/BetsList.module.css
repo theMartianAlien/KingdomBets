@@ -41,9 +41,22 @@
 }
 
 .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 1rem;
+}
+
+.leparticipants {
+
 }
 
 .item h2 {
     margin: 0 0 1rem 0;
+}
+
+.bet-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

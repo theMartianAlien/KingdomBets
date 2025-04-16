@@ -7,10 +7,10 @@ function BetsNavigation() {
       <nav>
         <ul className={classes.list}>
           <li>
-            <NavLink href="/bets" className={({ isActive }) => isActive ? classes.active : undefined} end>All Bets</NavLink>
+            <NavLink to="/bets" className={({ isActive }) => isActive ? classes.active : undefined} end>All Bets</NavLink>
           </li>
           <li>
-            <NavLink href="/bets/new" className={({ isActive }) => isActive ? classes.active : undefined}>New Bet</NavLink>
+            <NavLink to="/bets/new" className={({ isActive }) => isActive ? classes.active : undefined}>New Bet</NavLink>
           </li>
         </ul>
       </nav>
