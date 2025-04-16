@@ -1,0 +1,12 @@
+.list {
+    gap: 1rem;
+    list-style-type: none;
+}
+
+.winner {
+    font-weight: 700;
+}
+
+.status {
+    font-weight: 600;    
+}
